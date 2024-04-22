@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace GmFire\\NexusphpApi;
+namespace GmFire\NexusphpApi;
 
 use Flarum\Extend;
 
 return [
-    
+
     (new Extend\Frontend('admin'))
-        
-        
+        ->js(__DIR__.'/js/dist/admin.js'),
+
     new Extend\Locales(__DIR__.'/locale'),
 ];

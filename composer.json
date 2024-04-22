@@ -1,6 +1,6 @@
 {
     "name": "gm-fire/nexusphp-api",
-    "description": "Nexusphp Api",
+    "description": "nexusphp-api",
     "keywords": [
         "flarum"
     ],
@@ -35,18 +35,18 @@
             "modules": {
                 "admin": true,
                 "forum": false,
-                "js": false,
-                "jsCommon": false,
+                "js": true,
+                "jsCommon": true,
                 "css": false,
                 "locale": true,
                 "gitConf": true,
                 "githubActions": true,
-                "prettier": false,
-                "typescript": false,
+                "prettier": true,
+                "typescript": true,
                 "bundlewatch": false,
                 "backendTesting": true,
-                "editorConfig": false,
-                "styleci": false
+                "editorConfig": true,
+                "styleci": true
             }
         }
     },
