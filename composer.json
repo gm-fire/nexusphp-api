@@ -24,11 +24,11 @@
     "extra": {
         "flarum-extension": {
             "title": "Nexusphp Api",
-            "category": "",
+            "category": "feature",
             "icon": {
-                "name": "",
-                "color": "",
-                "backgroundColor": ""
+                "name": "fas fa-people-arrows",
+                "color": "#fff",
+                "backgroundColor": "#16416d"
             }
         },
         "flarum-cli": {
