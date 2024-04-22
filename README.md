@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/gm-fire/nexusphp-api.svg)](https://packagist.org/packages/gm-fire/nexusphp-api) [![Total Downloads](https://img.shields.io/packagist/dt/gm-fire/nexusphp-api.svg)](https://packagist.org/packages/gm-fire/nexusphp-api)
 
-A [Flarum](http://flarum.org) extension. nexusphp-api
+A [Flarum](http://flarum.org) extension. Nexusphp Api
 
 ## Installation
 
