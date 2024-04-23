@@ -9,7 +9,7 @@ class EditNickname
     /**
      * @var int
      */
-    public $modelId;
+    public $username;
 
     /**
      * @var \Flarum\User\User
@@ -21,9 +21,9 @@ class EditNickname
      */
     public $data;
 
-    public function __construct($modelId, User $actor, array $data)
+    public function __construct($username, User $actor, array $data)
     {
-        $this->modelId = $modelId;
+        $this->username = $username;
         $this->actor = $actor;
         $this->data = $data;
     }

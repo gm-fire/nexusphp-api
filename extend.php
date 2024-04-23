@@ -23,6 +23,4 @@ return [
     (new Extend\Routes('api'))
         ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class),
 
-    (new Extend\Policy())
-        ->modelPolicy(Nickname::class, Access\NicknamePolicy::class),
 ];

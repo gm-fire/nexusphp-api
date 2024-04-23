@@ -13,6 +13,7 @@ use GmFire\NexusphpApi\Api\Serializer\NicknameSerializer;
 
 class UpdateNicknameController extends AbstractShowController
 {
+
     /**
      * {@inheritdoc}
      */
@@ -40,13 +41,11 @@ class UpdateNicknameController extends AbstractShowController
         // See https://docs.flarum.org/extend/api.html#api-endpoints for more information.
 
         $actor = RequestUtil::getActor($request);
-        $modelId = Arr::get($request->getQueryParams(), 'username');
+        $username = Arr::get($request->getQueryParams(), 'username');
         $data = Arr::get($request->getParsedBody(), 'data', []);
 
-        $model = $this->bus->dispatch(
-            new EditNickname($modelId, $actor, $data)
+        return $this->bus->dispatch(
+            new EditNickname($username, $actor, $data)
         );
-
-        return $model;
     }
 }
