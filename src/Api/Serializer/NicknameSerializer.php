@@ -3,7 +3,7 @@
 namespace GmFire\NexusphpApi\Api\Serializer;
 
 use Flarum\Api\Serializer\AbstractSerializer;
-use GmGire\NexusphpApi\Nickname;
+use GmFire\NexusphpApi\Nickname;
 use InvalidArgumentException;
 
 class NicknameSerializer extends AbstractSerializer

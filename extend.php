@@ -16,11 +16,13 @@ use Flarum\Extend;
 return [
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__.'/js/dist/admin.js')
-        ->css(__DIR__.'/less/admin.less'),
+        ->js(__DIR__.'/js/dist/admin.js'),
 
     new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\Routes('api'))
-        ->patch('/nickname/{username}', 'nickname.update', Api\Controller\UpdateNicknameController::class),
+        ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class),
+
+    (new Extend\Policy())
+        ->modelPolicy(Nickname::class, Access\NicknamePolicy::class),
 ];

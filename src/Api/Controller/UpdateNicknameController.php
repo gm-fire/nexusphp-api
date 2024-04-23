@@ -4,17 +4,33 @@ namespace GmFire\NexusphpApi\Api\Controller;
 
 use Flarum\Api\Controller\AbstractShowController;
 use Flarum\Http\RequestUtil;
+use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
-use Nickname;
+use GmFire\NexusphpApi\Command\EditNickname;
+use GmFire\NexusphpApi\Api\Serializer\NicknameSerializer;
 
 class UpdateNicknameController extends AbstractShowController
 {
     /**
      * {@inheritdoc}
      */
-    public $serializer = Nickname::class;
+    public $serializer = NicknameSerializer::class;
+
+    /**
+     * @var Dispatcher
+     */
+    protected $bus;
+
+    /**
+     * @param Dispatcher $bus
+     */
+    public function __construct(Dispatcher $bus)
+    {
+        $this->bus = $bus;
+    }
+
 
     /**
      * {@inheritdoc}
@@ -26,10 +42,11 @@ class UpdateNicknameController extends AbstractShowController
         $actor = RequestUtil::getActor($request);
         $modelId = Arr::get($request->getQueryParams(), 'username');
         $data = Arr::get($request->getParsedBody(), 'data', []);
-        var_dump($modelId);
-        var_dump(Arr::get($request->getParsedBody(), 'data'));
-        // $model = ...
-        die('123');
+
+        $model = $this->bus->dispatch(
+            new EditNickname($modelId, $actor, $data)
+        );
+
         return $model;
     }
 }
