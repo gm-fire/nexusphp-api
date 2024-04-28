@@ -1,0 +1,11 @@
+gm-fire-nexusphp-api:
+  admin:
+    settings:
+      secret: 通讯 Secret
+  api:
+
+  forum:
+    settings:
+      push_header: 推送
+  ref:
+
