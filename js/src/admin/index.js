@@ -7,6 +7,8 @@ app.initializers.add('gm-fire/nexusphp-api', () => {
       setting: 'nexusphp-api.secret',
       type: 'text',
       label: app.translator.trans('gm-fire-nexusphp-api.admin.settings.secret'),
+      placeholder: 'abcdefghijABCDEFGHIJabcdefghijABCDEFGHIJ',
+      help: app.translator.trans('gm-fire-nexusphp-api.admin.settings.secret_help'),
     })
     // .registerPermission(
     //   {

@@ -16,7 +16,6 @@ use GmFire\NexusphpApi\Job\SendPushNotificationsJob;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\User\User;
 use Illuminate\Contracts\Queue\Queue;
-use Illuminate\Support\Arr;
 
 class PushNotificationDriver implements NotificationDriverInterface
 {
@@ -38,16 +37,11 @@ class PushNotificationDriver implements NotificationDriverInterface
 
     public function send(BlueprintInterface $blueprint, array $users): void
     {
-//        var_dump($users);
-        if (!$users) {
-//            var_dump($blueprint->getSubject()['user_id']);
-//            die('123');
-        } else {
-            $userIds = Arr::pluck($users, 'username');
-        }
-
-        if (count($userIds)) {
-            $this->queue->push(new SendPushNotificationsJob($blueprint, $userIds));
+//        var_dump($blueprint->getSubject());
+//        var_dump($blueprint->getFromUser());
+        var_dump($blueprint->getType());
+        if (count($users)) {
+            $this->queue->push(new SendPushNotificationsJob($blueprint, $users));
         }
     }
 

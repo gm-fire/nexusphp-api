@@ -2,10 +2,14 @@ gm-fire-nexusphp-api:
   admin:
     settings:
       secret: 通讯 Secret
+      secret_help: 密钥长度固定为40个字符
   api:
 
   forum:
+    notifications:
+      post_reply_text: "{username} 回复了你的主题"
     settings:
       push_header: 推送
+      notify_post_reply_label: 我的主题被回复
   ref:
 

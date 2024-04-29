@@ -22,7 +22,8 @@ class PushSender
 
     public static function notify(array $recipients, BlueprintInterface $blueprint)
     {
-        var_dump($recipients);
+        $userIds = Arr::pluck($recipients, 'username');
+        var_dump($userIds);
         die('123');
     }
 

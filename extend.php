@@ -11,7 +11,9 @@
 
 namespace GmFire\NexusphpApi;
 
-use GmFire\NexusphpApi\PushNotificationDriver;
+use GmFire\NexusphpApi\Event\PostWasReply;
+use GmFire\NexusphpApi\Notification\PostReplyBlueprint;
+use Flarum\Api\Serializer\PostSerializer;
 use Flarum\Extend;
 
 return [
@@ -28,8 +30,16 @@ return [
         ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class),
 
     (new Extend\Settings())
-        ->default('nexusphp-api.secret', 40),
+        ->default('nexusphp-api.secret', ''),
+
+    (new Extend\User())
+        ->registerPreference('postAfterReply', 'boolval', true),
 
     (new Extend\Notification())
+        ->type(PostReplyBlueprint::class, PostSerializer::class, ['push'])
         ->driver('push', PushNotificationDriver::class),
+
+    (new Extend\Event())
+        ->listen(PostWasReply::class, Listener\SendNotificationWhenPostIsReply::class)
+        ->subscribe(Listener\SendPostReplyToPush::class),
 ];
