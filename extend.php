@@ -30,6 +30,7 @@ return [
         ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class),
 
     (new Extend\Settings())
+        ->default('nexusphp-api.apiurl', '')
         ->default('nexusphp-api.secret', ''),
 
     (new Extend\User())

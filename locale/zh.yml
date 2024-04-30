@@ -1,6 +1,8 @@
 gm-fire-nexusphp-api:
   admin:
     settings:
+      apiurl: 站点 Url
+      apiurl_help: 站点全域名，结尾不要带/
       secret: 通讯 Secret
       secret_help: 密钥长度固定为40个字符
   api:

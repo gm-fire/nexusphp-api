@@ -4,6 +4,13 @@ app.initializers.add('gm-fire/nexusphp-api', () => {
   app.extensionData
     .for('gm-fire-nexusphp-api')
     .registerSetting({
+      setting: 'nexusphp-api.apiurl',
+      type: 'text',
+      label: app.translator.trans('gm-fire-nexusphp-api.admin.settings.apiurl'),
+      placeholder: 'https://www.xxx.com',
+      help: app.translator.trans('gm-fire-nexusphp-api.admin.settings.apiurl_help'),
+    })
+    .registerSetting({
       setting: 'nexusphp-api.secret',
       type: 'text',
       label: app.translator.trans('gm-fire-nexusphp-api.admin.settings.secret'),

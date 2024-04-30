@@ -11,11 +11,9 @@
 
 namespace GmFire\NexusphpApi\Listener;
 
-use Flarum\Discussion\Discussion;
 use GmFire\NexusphpApi\Event\PostWasReply;
 use Flarum\Post\Event\Saving;
 use Illuminate\Contracts\Events\Dispatcher;
-use Flarum\Post\Post;
 
 class SendPostReplyToPush
 {

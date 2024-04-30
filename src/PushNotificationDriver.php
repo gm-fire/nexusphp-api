@@ -37,9 +37,6 @@ class PushNotificationDriver implements NotificationDriverInterface
 
     public function send(BlueprintInterface $blueprint, array $users): void
     {
-//        var_dump($blueprint->getSubject());
-//        var_dump($blueprint->getFromUser());
-        var_dump($blueprint->getType());
         if (count($users)) {
             $this->queue->push(new SendPushNotificationsJob($blueprint, $users));
         }
