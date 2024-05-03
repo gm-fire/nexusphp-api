@@ -28,7 +28,8 @@ return [
     new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\Routes('api'))
-        ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class),
+        ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class)
+        ->post('/seedbonus', 'seedbonus.create', Api\Controller\CreateSeedBonusController::class),
 
     (new Extend\Settings())
         ->default('gm-fire-nexusphp-api.apiurl', '')

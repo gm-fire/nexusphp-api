@@ -64,15 +64,9 @@ export default class SeedBonusModal extends Modal {
 
     app.request({
       method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': app.forum.attribute("gm-fire-nexusphp-api.secret"),
-      },
       url:
-        app.forum.attribute("gm-fire-nexusphp-api.apiurl") + "/api/flarum-senndbonus",
+        app.forum.attribute("apiUrl") + "/seedbonus",
       body: {
-        uid: this.uid,
         data: {
           nickname: this.nickname,
           username: this.username,
@@ -82,6 +76,7 @@ export default class SeedBonusModal extends Modal {
     })
       .then((data) => {
         this.loading = false;
+        this.success = true;
         m.redraw();
       })
       .catch((error) => {
@@ -89,23 +84,5 @@ export default class SeedBonusModal extends Modal {
         m.redraw();
         throw error;
       });
-
-// console.log(this.seedbonus);
-    // app.store
-    //   .createRecord('seedbonus')
-    //   .save(
-    //     {
-    //       reason: this.reason() === 'other' ? null : this.reason(),
-    //       reasonDetail: this.reasonDetail(),
-    //       relationships: {
-    //         user: app.session.user,
-    //         post: this.attrs.post,
-    //       },
-    //     },
-    //     { errorHandler: this.onerror.bind(this) }
-    //   )
-    //   .then(() => (this.success = true))
-    //   .catch(() => {})
-    //   .then(this.loaded.bind(this));
   }
 }
