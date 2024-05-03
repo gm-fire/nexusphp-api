@@ -1,12 +1,14 @@
 import { extend } from 'flarum/common/extend';
 import app from 'flarum/forum/app';
-import SettingsPage from 'flarum/forum/components/SettingsPage';
+import addSeedBonusAction from './addSeedBonusAction';
 import NotificationGrid from 'flarum/forum/components/NotificationGrid';
 import PostReplyNotification from './components/PostReplyNotification';
 
 app.initializers.add('gm-fire-nexusphp-api', () => {
 
   app.notificationComponents.postReply = PostReplyNotification;
+
+  addSeedBonusAction();
 
   extend(NotificationGrid.prototype, 'notificationMethods', function (items) {
     items.add('push', {

@@ -11,6 +11,7 @@
 
 namespace GmFire\NexusphpApi;
 
+use Flarum\Api\Serializer\ForumSerializer;
 use GmFire\NexusphpApi\Event\PostWasReply;
 use GmFire\NexusphpApi\Notification\PostReplyBlueprint;
 use Flarum\Api\Serializer\PostSerializer;
@@ -30,8 +31,11 @@ return [
         ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class),
 
     (new Extend\Settings())
-        ->default('nexusphp-api.apiurl', '')
-        ->default('nexusphp-api.secret', ''),
+        ->default('gm-fire-nexusphp-api.apiurl', '')
+        ->default('gm-fire-nexusphp-api.secret', ''),
+
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->attributes(Extenders\ForumAttributes::class),
 
     (new Extend\User())
         ->registerPreference('postAfterReply', 'boolval', true),

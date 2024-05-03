@@ -5,13 +5,23 @@ gm-fire-nexusphp-api:
       apiurl_help: 站点全域名，结尾不要带/
       secret: 通讯 Secret
       secret_help: 密钥长度固定为40个字符
+      seedbonus_open: 开启射魔
+      seedbonus_label: 射魔标签
+      seedbonus_label_placeholder: '=> gm-fire-nexusphp-api.ref.seedbonus_label'
   api:
 
   forum:
+    seedbonus:
+      title: 赠送茉莉
+      title_placeholder: '请输入要赠送的茉莉值'
+      confirmation_message: 赠人茉莉，手留余香
+      dismiss_button: '=> gm-fire-nexusphp-api.ref.okay'
+      submit_button: '=> gm-fire-nexusphp-api.ref.okay'
     notifications:
       post_reply_text: "{username} 回复了你的主题"
     settings:
       push_header: 推送
       notify_post_reply_label: 我的主题被回复
   ref:
-
+    okay: 确定
+    seedbonus_label: 射魔
