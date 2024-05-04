@@ -1,10 +1,7 @@
 import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
-
 import Stream from 'flarum/common/utils/Stream';
-import withAttr from 'flarum/common/utils/withAttr';
-import ItemList from 'flarum/common/utils/ItemList';
 
 export default class SeedBonusModal extends Modal {
   oninit(vnode) {
@@ -46,7 +43,7 @@ export default class SeedBonusModal extends Modal {
       <div className="Modal-body">
         <div className="Form Form--centered">
           <div className="Form-group">
-            <input type="number" min="100" autocomplete="off" name="senndbonus" className="FormControl" max="10000000" bidi={this.seedbonus} placeholder={app.translator.trans('gm-fire-nexusphp-api.forum.seedbonus.title_placeholder')} disabled={this.loading}/>
+            <input type="number" min="100" autocomplete="off" name="senndbonus" className="FormControl" max="10000000" onblur={this.seedbonus(this.seedbonus().toString().replace(/[^0-9-]/g, ""))} bidi={this.seedbonus} placeholder={app.translator.trans('gm-fire-nexusphp-api.forum.seedbonus.title_placeholder')} disabled={this.loading}/>
           </div>
           <div className="Form-group">
             <Button className="Button Button--primary Button--block" type="submit" loading={this.loading} disabled={this.loading}>
@@ -60,20 +57,20 @@ export default class SeedBonusModal extends Modal {
 
   onsubmit(e) {
     e.preventDefault();
-    this.loading = true;
-
-    app.request({
-      method: "POST",
-      url:
-        app.forum.attribute("apiUrl") + "/seedbonus",
-      body: {
-        data: {
-          nickname: this.nickname,
-          username: this.username,
-          seedbonus: this.seedbonus,
-        }
-      },
-    })
+    if (typeof parseInt(this.seedbonus()) === 'number') {
+      this.loading = true;
+      app.request({
+        method: "POST",
+        url:
+          app.forum.attribute("apiUrl") + "/seedbonus",
+        body: {
+          data: {
+            nickname: this.nickname,
+            username: this.username,
+            seedbonus: this.seedbonus,
+          }
+        },
+      })
       .then((data) => {
         this.loading = false;
         this.success = true;
@@ -84,5 +81,6 @@ export default class SeedBonusModal extends Modal {
         m.redraw();
         throw error;
       });
+    }
   }
 }
