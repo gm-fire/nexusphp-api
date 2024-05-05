@@ -44,8 +44,7 @@ class ListMedalsHandler
 
         try {
             $response = self::httpClient()->get('/api/flarum-medals/', ['json' => [
-                "uid"  => $actor['username'],
-                "data" => $data
+                "uid"  => $data['username']
             ]]);
         } catch (ClientException $e) {
             return $e->getResponse()->getBody()->getContents();
