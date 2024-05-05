@@ -14,7 +14,6 @@ namespace GmFire\NexusphpApi\Api\Controller;
 use Flarum\Api\Controller\AbstractShowController;
 use Flarum\Http\RequestUtil;
 use Illuminate\Contracts\Bus\Dispatcher;
-use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 use GmFire\NexusphpApi\Command\ListMedals;

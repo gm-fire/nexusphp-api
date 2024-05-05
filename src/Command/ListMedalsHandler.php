@@ -15,6 +15,7 @@ use Flarum\Foundation\DispatchEventsTrait;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\UserRepository;
 use Illuminate\Contracts\Events\Dispatcher;
+use GuzzleHttp\Exception\ClientException;
 
 class ListMedalsHandler
 {
@@ -39,14 +40,22 @@ class ListMedalsHandler
     {
         $actor = $command->actor;
         $data = $command->data;
+        $response = [];
 
-        $result = self::httpClient()->get('/api/flarum-medals', ['json' => [
-            "uid"  => $actor['username'],
-            "data" => $data
-        ]]);
-        $result = json_decode($result->getBody()->getContents(), true);
+        try {
+            $response = self::httpClient()->get('/api/flarum-medals/', ['json' => [
+                "uid"  => $actor['username'],
+                "data" => $data
+            ]]);
+        } catch (ClientException $e) {
+            return $e->getResponse()->getBody()->getContents();
+        }
 
-        return json_encode($result['data']);
+        if ($response) {
+            $result = json_decode($response->getBody()->getContents(), true);
+            return json_encode($result['data']);
+        }
+
     }
 
     protected function httpClient()
