@@ -29,8 +29,10 @@ return [
     new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\Routes('api'))
+        ->get('/medals', 'medals.index', Api\Controller\ListMedalsController::class)
         ->patch('/nicknames/{username}', 'nicknames.update', Api\Controller\UpdateNicknameController::class)
-        ->post('/seedbonus', 'seedbonus.create', Api\Controller\CreateSeedBonusController::class),
+        ->post('/seedbonus', 'seedbonus.create', Api\Controller\CreateSeedBonusController::class)
+        ->post('/avatarupload', 'avatar.upload', Api\Controller\UploadAvatarController::class),
 
     (new Extend\Settings())
         ->default('gm-fire-nexusphp-api.apiurl', '')
