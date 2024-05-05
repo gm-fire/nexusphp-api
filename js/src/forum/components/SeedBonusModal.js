@@ -61,15 +61,14 @@ export default class SeedBonusModal extends Modal {
       this.loading = true;
       app.request({
         method: "POST",
-        url:
-          app.forum.attribute("apiUrl") + "/seedbonus",
+        url: app.forum.attribute("apiUrl") + "/seedbonus",
         body: {
           data: {
             nickname: this.nickname,
             username: this.username,
-            seedbonus: this.seedbonus,
+            seedbonus: this.seedbonus
           }
-        },
+        }
       })
       .then((data) => {
         this.loading = false;

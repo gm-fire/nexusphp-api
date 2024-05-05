@@ -5,23 +5,41 @@ import Tooltip from 'flarum/common/components/Tooltip';
 export default class MedalsBar extends Component {
   oninit(vnode) {
     super.oninit(vnode);
+
+    const user = this.attrs.user;
+    this.medals = [];
+
+    if (user.data.attributes) {
+      app.request({
+        method: "GET",
+        url: app.forum.attribute("apiUrl") + "/medals",
+        params: {
+          username: user.data.attributes.username
+        }
+      })
+      .then((data) => {
+        this.medals = JSON.parse(data.data.id);
+        m.redraw();
+      })
+    }
   }
 
   view() {
-    const user = this.attrs.user;
+    const medals = this.medals || [];
 
     return (
       <div class="PostUser-medals">
           <span class="PostUser-text">
-            <Tooltip text='<img src="https://img.agsv.top/i/2024/03/29/7im6x.gif" height="185ßpx" width="185px;"/>' html>
-            <img src="https://img.agsv.top/i/2024/03/29/7im6x.gif" title="开发组" style="max-height: 15px;max-width: 15px;margin-left: 2pt"/>
-            </Tooltip>
-            <Tooltip text='<img src="https://img.agsv.top/i/2024/04/07/wjai.gif" height="185ßpx" width="185px;"/>' html>
-            <img src="https://img.agsv.top/i/2024/04/07/wjai.gif" title="发布组" style="max-height: 15px;max-width: 15px;margin-left: 2pt"/>
-            </Tooltip>
-            <Tooltip text='<img src="https://img.agsv.top/i/2024/04/12/zvha.gif" height="185ßpx" width="185px;"/>' html>
-            <img src="https://img.agsv.top/i/2024/04/12/zvha.gif" title="末日大富豪" style="max-height: 15px;max-width: 15px;margin-left: 2pt"/>
-            </Tooltip>
+            {medals.length ? (
+              medals.map((medal) => {
+                let imgsrc = '<img src=' + medal.image_large + ' data-reaction height="185px" width="185px;"/>';
+                return (
+                  <Tooltip text={imgsrc} html>
+                    <img src={medal.image_small} title={medal.name} data-reaction style="max-height: 15px;max-width: 15px;margin-left: 2pt"/>
+                  </Tooltip>
+                );
+              })
+            ) : ""}
           </span>
       </div>
     );

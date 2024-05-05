@@ -15,17 +15,17 @@ use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\User\User;
 use InvalidArgumentException;
 
-class SeedBonusSerializer extends AbstractSerializer
+class MedalsSerializer extends AbstractSerializer
 {
     /**
      * {@inheritdoc}
      */
-    protected $type = 'seedbonus';
+    protected $type = 'medals';
 
     /**
      * {@inheritdoc}
      *
-     * @param SeedBonus $user
+     * @param Medals $user
      * @throws InvalidArgumentException
      */
     protected function getDefaultAttributes($user)

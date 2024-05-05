@@ -13,7 +13,7 @@ namespace GmFire\NexusphpApi\Command;
 
 use Flarum\User\User;
 
-class CreateSeedBonus
+class ListMedals
 {
     /**
      * @var \Flarum\User\User

@@ -14,10 +14,9 @@ namespace GmFire\NexusphpApi\Command;
 use Flarum\Foundation\DispatchEventsTrait;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\UserRepository;
-use Flarum\User\UserValidator;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class CreateSeedBonusHandler
+class ListMedalsHandler
 {
     use DispatchEventsTrait;
 
@@ -27,33 +26,27 @@ class CreateSeedBonusHandler
     protected $users;
 
     /**
-     * @var UserValidator
-     */
-    protected $validator;
-
-    /**
      * @param Dispatcher $events
      * @param \Flarum\User\UserRepository $users
-     * @param UserValidator $validator
      */
-    public function __construct(Dispatcher $events, UserRepository $users, UserValidator $validator)
+    public function __construct(Dispatcher $events, UserRepository $users)
     {
         $this->events = $events;
         $this->users = $users;
-        $this->validator = $validator;
     }
 
-    public function handle(CreateSeedBonus $command)
+    public function handle(ListMedals $command)
     {
         $actor = $command->actor;
         $data = $command->data;
 
-        $result = self::httpClient()->post('/api/flarum-seedbonus', ['json' => [
+        $result = self::httpClient()->get('/api/flarum-medals', ['json' => [
             "uid"  => $actor['username'],
             "data" => $data
         ]]);
+        $result = json_decode($result->getBody()->getContents(), true);
 
-        return json_encode($result->getBody()->getContents());
+        return json_encode($result['data']);
     }
 
     protected function httpClient()
