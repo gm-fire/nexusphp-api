@@ -12,8 +12,8 @@
 namespace GmFire\NexusphpApi\Api\Controller;
 
 use Flarum\Api\Controller\AbstractShowController;
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Http\RequestUtil;
-use GmFire\NexusphpApi\Api\Serializer\SeedBonusSerializer;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,7 +26,7 @@ class CreateSeedBonusController extends AbstractShowController
     /**
      * {@inheritdoc}
      */
-    public $serializer = SeedBonusSerializer::class;
+    public $serializer = UserSerializer::class;
 
     /**
      * @var Dispatcher

@@ -12,10 +12,9 @@
 namespace GmFire\NexusphpApi\Command;
 
 use Flarum\Foundation\DispatchEventsTrait;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\UserRepository;
+use GmFire\NexusphpApi\HttpClient;
 use Illuminate\Contracts\Events\Dispatcher;
-use GuzzleHttp\Exception\ClientException;
 
 class ListMedalsHandler
 {
@@ -38,35 +37,16 @@ class ListMedalsHandler
 
     public function handle(ListMedals $command)
     {
-        $actor = $command->actor;
         $data = $command->data;
-        $response = [];
 
-        try {
-            $response = self::httpClient()->get('/api/flarum-medals/', ['json' => [
-                "uid"  => $data['username']
-            ]]);
-        } catch (ClientException $e) {
-            return $e->getResponse()->getBody()->getContents();
-        }
+        $api = new HttpClient();
+        $response = $api->getClient()->get('/api/flarum-medals/', ['json' => [
+            "uid"  => $data['username']
+        ]]);
 
         if ($response) {
             $result = json_decode($response->getBody()->getContents(), true);
             return json_encode($result['data']);
         }
-
-    }
-
-    protected function httpClient()
-    {
-        $settings = app(SettingsRepositoryInterface::class);
-        $apiurl = $settings->get('nexusphp-api.apiurl');
-        $secret = $settings->get('nexusphp-api.secret');
-        $headers = [
-            'Accept' => 'application/json',
-            'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => $secret
-        ];
-        return new \GuzzleHttp\Client(['base_uri' => $apiurl, 'headers' => $headers]);
     }
 }

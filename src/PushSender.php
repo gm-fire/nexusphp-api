@@ -12,7 +12,6 @@
 namespace GmFire\NexusphpApi;
 
 use Flarum\Notification\Blueprint\BlueprintInterface;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Support\Arr;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Flarum\Post\CommentPost;
@@ -30,7 +29,8 @@ class PushSender
 
         $userIds = Arr::pluck($recipients, 'username');
         // 请求nuxesphp api发短消息
-        self::httpClient()->post('/api/flarum-messages', ['json' => [
+        $api = new HttpClient();
+        $api->getClient()->post('/api/flarum-messages', ['json' => [
             "uid"  => $userIds[0],
             "data" => [
                 "subject" => $subject,
@@ -109,16 +109,4 @@ class PushSender
         return $relevantPost->formatContent();
     }
 
-    protected static function httpClient()
-    {
-        $settings = app(SettingsRepositoryInterface::class);
-        $apiurl = $settings->get('nexusphp-api.apiurl');
-        $secret = $settings->get('nexusphp-api.secret');
-        $headers = [
-            'Accept' => 'application/json',
-            'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => $secret
-        ];
-        return new \GuzzleHttp\Client(['base_uri' => $apiurl, 'headers' => $headers]);
-    }
 }

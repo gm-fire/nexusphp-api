@@ -12,12 +12,12 @@
 namespace GmFire\NexusphpApi\Api\Controller;
 
 use Flarum\Api\Controller\AbstractShowController;
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Http\RequestUtil;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 use GmFire\NexusphpApi\Command\ListMedals;
-use GmFire\NexusphpApi\Api\Serializer\MedalsSerializer;
 
 class ListMedalsController extends AbstractShowController
 {
@@ -25,7 +25,7 @@ class ListMedalsController extends AbstractShowController
     /**
      * {@inheritdoc}
      */
-    public $serializer = MedalsSerializer::class;
+    public $serializer = UserSerializer::class;
 
     /**
      * @var Dispatcher

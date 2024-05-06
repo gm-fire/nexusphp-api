@@ -12,9 +12,9 @@
 namespace GmFire\NexusphpApi\Command;
 
 use Flarum\Foundation\DispatchEventsTrait;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\UserRepository;
 use Flarum\User\UserValidator;
+use GmFire\NexusphpApi\HttpClient;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class CreateSeedBonusHandler
@@ -48,24 +48,12 @@ class CreateSeedBonusHandler
         $actor = $command->actor;
         $data = $command->data;
 
-        $result = self::httpClient()->post('/api/flarum-seedbonus', ['json' => [
+        $api = new HttpClient();
+        $result = $api->getClient()->post('/api/flarum-seedbonus', ['json' => [
             "uid"  => $actor['username'],
             "data" => $data
         ]]);
 
         return json_encode($result->getBody()->getContents());
-    }
-
-    protected function httpClient()
-    {
-        $settings = app(SettingsRepositoryInterface::class);
-        $apiurl = $settings->get('nexusphp-api.apiurl');
-        $secret = $settings->get('nexusphp-api.secret');
-        $headers = [
-            'Accept' => 'application/json',
-            'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => $secret
-        ];
-        return new \GuzzleHttp\Client(['base_uri' => $apiurl, 'headers' => $headers]);
     }
 }

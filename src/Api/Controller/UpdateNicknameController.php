@@ -12,13 +12,13 @@
 namespace GmFire\NexusphpApi\Api\Controller;
 
 use Flarum\Api\Controller\AbstractShowController;
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Http\RequestUtil;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 use GmFire\NexusphpApi\Command\EditNickname;
-use GmFire\NexusphpApi\Api\Serializer\NicknameSerializer;
 
 class UpdateNicknameController extends AbstractShowController
 {
@@ -26,7 +26,7 @@ class UpdateNicknameController extends AbstractShowController
     /**
      * {@inheritdoc}
      */
-    public $serializer = NicknameSerializer::class;
+    public $serializer = UserSerializer::class;
 
     /**
      * @var Dispatcher
