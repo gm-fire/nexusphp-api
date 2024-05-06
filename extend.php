@@ -12,6 +12,7 @@
 namespace GmFire\NexusphpApi;
 
 use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\User\Event\AvatarChanged;
 use GmFire\NexusphpApi\Event\PostWasReply;
 use GmFire\NexusphpApi\Notification\PostReplyBlueprint;
 use Flarum\Api\Serializer\PostSerializer;
@@ -49,6 +50,7 @@ return [
         ->driver('push', PushNotificationDriver::class),
 
     (new Extend\Event())
+        ->listen(AvatarChanged::class, Listener\UserAvatarChanged::class)
         ->listen(PostWasReply::class, Listener\SendNotificationWhenPostIsReply::class)
         ->subscribe(Listener\SendPostReplyToPush::class),
 ];
