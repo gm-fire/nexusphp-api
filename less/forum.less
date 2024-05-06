@@ -1,11 +1,17 @@
 .PostUser-medals {
   display: inline-block;
-  text-align: center;
-  z-index: 99;
+  position: relative;
+  top: 2px;
 }
 
 .PostUser-medals .tooltip-inner {
   background-color: transparent;
+}
+
+.PostUser-medals .PostUser-text .image {
+  max-height: 15px;
+  max-width: 15px;
+  margin-left: 2pt
 }
 
 .SeedBonusModal {
@@ -26,12 +32,4 @@
   .Modal-content {
     min-height: auto;
   }
-
-  //.PostUser-medals {
-  //  float: right;
-  //  position: relative;
-  //  margin-top: -10px;
-  //  width: 64px;
-  //  text-align: left;
-  //}
 }

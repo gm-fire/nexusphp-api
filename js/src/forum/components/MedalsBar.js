@@ -35,7 +35,7 @@ export default class MedalsBar extends Component {
                 let imgsrc = '<img src=' + medal.image_large + ' data-reaction height="185px" width="185px;"/>';
                 return (
                   <Tooltip text={imgsrc} html>
-                    <img src={medal.image_small} title={medal.name} data-reaction style="max-height: 15px;max-width: 15px;margin-left: 2pt"/>
+                    <img src={medal.image_small} title={medal.name} data-reaction class="image"/>
                   </Tooltip>
                 );
               })
