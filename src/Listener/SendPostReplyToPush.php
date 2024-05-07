@@ -34,7 +34,9 @@ class SendPostReplyToPush
         $actor = $event->actor;
 
         if ($post && $actor) {
-            $post->raise(new PostWasReply($post, $actor));
+            if ($post->discussion->user->id !== $actor->id) {
+                $post->raise(new PostWasReply($post, $actor));
+            }
         }
     }
 
