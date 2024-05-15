@@ -2,6 +2,7 @@ import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import Stream from 'flarum/common/utils/Stream';
+import extractText from 'flarum/common/utils/extractText';
 
 export default class SeedBonusModal extends Modal {
   oninit(vnode) {
@@ -71,8 +72,14 @@ export default class SeedBonusModal extends Modal {
         }
       })
       .then((data) => {
+        if (data.data.attributes.ret === 0) {
+          this.success = true;
+        } else {
+          app.alerts.show({type: 'error'},
+            extractText(data.data.attributes.msg)
+          );
+        }
         this.loading = false;
-        this.success = true;
         m.redraw();
       })
       .catch((error) => {

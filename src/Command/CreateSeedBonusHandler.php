@@ -54,6 +54,6 @@ class CreateSeedBonusHandler
             "data" => $data
         ]]);
 
-        return json_encode($result->getBody()->getContents());
+        return json_decode($result->getBody()->getContents());
     }
 }
