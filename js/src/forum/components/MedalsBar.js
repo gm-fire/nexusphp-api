@@ -26,8 +26,9 @@ export default class MedalsBar extends Component {
 
   view() {
     const medals = this.medals || [];
-
+    const userUrl = app.data.nexusphpApiPluginSettings.apiurl + '/userdetails.php?id=' + this.attrs.user.data.attributes.username;
     return (
+      <>
       <div class="PostUser-medals">
           <span class="PostUser-text">
             {medals.length ? (
@@ -42,6 +43,8 @@ export default class MedalsBar extends Component {
             ) : ""}
           </span>
       </div>
+      <div class="PostUser-details"><a href={userUrl} target="_blank">详细资料</a></div>
+      </>
     );
   }
 }

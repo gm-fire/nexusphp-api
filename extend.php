@@ -16,13 +16,23 @@ use Flarum\User\Event\AvatarChanged;
 use GmFire\NexusphpApi\Event\PostWasReply;
 use GmFire\NexusphpApi\Notification\PostReplyBlueprint;
 use Flarum\Api\Serializer\PostSerializer;
+use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Frontend\Document;
 use Flarum\Extend;
 
 return [
 
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum.less'),
+        ->css(__DIR__.'/less/forum.less')
+        ->content(function (Document $document) {
+            $settings = resolve(SettingsRepositoryInterface::class);
+
+            // 将设置注入前端全局变量
+            $document->payload['nexusphpApiPluginSettings'] = [
+                'apiurl' => $settings->get('gm-fire-nexusphp-api.apiurl')
+            ];
+        }),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js'),
