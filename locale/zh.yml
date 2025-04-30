@@ -18,10 +18,23 @@ gm-fire-nexusphp-api:
       dismiss_button: '=> gm-fire-nexusphp-api.ref.okay'
       submit_button: '=> gm-fire-nexusphp-api.ref.okay'
     notifications:
+      post_bonus_text: "{username} 给你的主题赠送了茉莉"
       post_reply_text: "{username} 回复了你的主题"
+      others_text: '{count, plural, one {# 人} other {# 人}}'
     settings:
       push_header: 推送
+      notify_post_bonus_label: 我的主题被赠送茉莉
       notify_post_reply_label: 我的主题被回复
+    post:
+      bonus_link: 送
+      bonus_by_text: '{users} 赠送了茉莉'
+      others_link: '{count, plural, one {# 人} other {# 人}}'
+      you_text: '你'
+    postbonus:
+      title: 赠送茉莉的用户
+      load_more_button: '加载更多'
+    user:
+      bonus_link: 被赠送
   ref:
     okay: 确定
     seedbonus_label: 射魔

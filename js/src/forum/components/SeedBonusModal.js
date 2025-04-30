@@ -11,9 +11,10 @@ export default class SeedBonusModal extends Modal {
     this.seedbonus = Stream(100);
     this.success = false;
     const user = this.attrs.user;
+    const post = this.attrs.post;
     this.nickname = Stream(user.data.attributes.displayName);
     this.username = Stream(user.data.attributes.username);
-    this.uid = Stream(app.session.user.data.id);
+    this.postId = Stream(post.data.id);
   }
 
   className() {
@@ -67,7 +68,8 @@ export default class SeedBonusModal extends Modal {
           data: {
             nickname: this.nickname,
             username: this.username,
-            seedbonus: this.seedbonus
+            seedbonus: this.seedbonus,
+            postId: this.postId
           }
         }
       })

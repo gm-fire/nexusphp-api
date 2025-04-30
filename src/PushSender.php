@@ -26,8 +26,8 @@ class PushSender
     {
         $subject = self::getTitle($blueprint);
         $content = self::getUrl($blueprint);
-
         $userIds = Arr::pluck($recipients, 'username');
+
         // 请求nuxesphp api发短消息
         $api = new HttpClient();
         $api->getClient()->post('/api/flarum-messages', ['json' => [
@@ -41,8 +41,9 @@ class PushSender
 
     protected static function getTitle(BlueprintInterface $blueprint)
     {
-        if ($blueprint->getType() == 'postReply') {
+        if ($blueprint->getType() == 'postReply' || $blueprint->getType() == 'postMentioned') {
             $translator = app(TranslatorInterface::class);
+
             return $translator->trans(
                 'gm-fire-nexusphp-api.forum.notifications.post_reply_text',
                 ['username' => $blueprint->getFromUser()->getDisplayNameAttribute()]

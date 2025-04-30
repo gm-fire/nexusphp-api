@@ -16,7 +16,7 @@ export default function () {
 
     items.add(
       'seedbonus',
-      <Button className="Button Button--link" onclick={() => app.modal.show(SeedBonusModal, { user })}>
+      <Button className="Button Button--link" onclick={() => app.modal.show(SeedBonusModal, { user, post })}>
         {app.forum.attribute('gm-fire-nexusphp-api.seedbonusLabel')}
       </Button>
     );
