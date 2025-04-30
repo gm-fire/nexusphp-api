@@ -34,7 +34,7 @@ gm-fire-nexusphp-api:
       title: 赠送茉莉的用户
       load_more_button: '加载更多'
     user:
-      bonus_link: 被赠送
+      bonus_link: 射魔
   ref:
     okay: 确定
     seedbonus_label: 射魔

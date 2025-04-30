@@ -15,7 +15,7 @@ export default class BonusUserPage extends PostsUserPage {
     return app.store.find('posts', {
       filter: {
         type: 'comment',
-        likedBy: this.user.id(),
+        bonusBy: this.user.id(),
       },
       page: { offset, limit: this.loadLimit },
       sort: '-createdAt',

@@ -76,6 +76,26 @@ return [
         ->loadWhere('posts.bonus', [LoadBonusRelationship::class, 'mutateRelation'])
         ->prepareDataForSerialization([LoadBonusRelationship::class, 'countRelation']),
 
+    (new Extend\ApiController(Controller\ListPostsController::class))
+        ->addInclude('bonus')
+        ->loadWhere('bonus', [LoadBonusRelationship::class, 'mutateRelation'])
+        ->prepareDataForSerialization([LoadBonusRelationship::class, 'countRelation']),
+
+    (new Extend\ApiController(Controller\ShowPostController::class))
+        ->addInclude('bonus')
+        ->loadWhere('bonus', [LoadBonusRelationship::class, 'mutateRelation'])
+        ->prepareDataForSerialization([LoadBonusRelationship::class, 'countRelation']),
+
+    (new Extend\ApiController(Controller\CreatePostController::class))
+        ->addInclude('bonus')
+        ->loadWhere('bonus', [LoadBonusRelationship::class, 'mutateRelation'])
+        ->prepareDataForSerialization([LoadBonusRelationship::class, 'countRelation']),
+
+    (new Extend\ApiController(Controller\UpdatePostController::class))
+        ->addInclude('bonus')
+        ->loadWhere('bonus', [LoadBonusRelationship::class, 'mutateRelation'])
+        ->prepareDataForSerialization([LoadBonusRelationship::class, 'countRelation']),
+
     (new Extend\User())
         ->registerPreference('postAfterReply', 'boolval', true),
 
